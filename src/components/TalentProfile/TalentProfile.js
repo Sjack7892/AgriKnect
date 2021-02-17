@@ -16,21 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import profilePhoto from '../TalentProfile/farmPhoto.jpeg'
-// import spacing from '@material-ui/core/s'
-// import faker from 'faker';
-import './talent.css'
 
-// const styles = muiBaseTheme => ({
-//     card: {
-//       maxWidth: 700,
-//       margin: "auto",
-//       transition: "0.3s",
-//       boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-//       "&:hover": {
-//         boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
-//       }
-//     }
-//     });
+import './talent.css'
 
 export class TalentProfile extends Component {
     state = {
@@ -53,7 +40,6 @@ export class TalentProfile extends Component {
     editSkills = () => {
         this.props.history.push(`/talentProfile/editSkills/${this.props.reduxState.user.id}`);
         console.log(this.props.reduxState.user.id)
-
     }
 
     editEquipment = () => {
@@ -63,19 +49,16 @@ export class TalentProfile extends Component {
     editCertifications = () => {
         this.props.history.push(`/talentProfile/editCertificate/${this.props.reduxState.user.id}`);
         console.log(this.props.reduxState.user.id)
-
     }
 
     editEducation = () => {
         this.props.history.push(`/talentProfile/editEducation/${this.props.reduxState.user.id}`);
         console.log(this.props.reduxState.user.id)
-
     }
 
     editEmployment = () => {
         this.props.history.push(`/talentProfile/editEmployment/${this.props.reduxState.user.id}`);
         console.log(this.props.reduxState.user.id)
-
     }
 
     renderEditButtons = () => {
@@ -94,41 +77,32 @@ export class TalentProfile extends Component {
         let editButtonControl = <span> </span>
         if (this.props.reduxState.user.id == this.props.match.params.id) {
             editButtonControl = <Button size="small" variant="outlined" onClick={this.renderEditButtons}> Edit Profile </Button>
-
         }
         const { classes } = this.props;
         let JSXRendered = <span> </span>
-        // let editAbout = <span> </span>
-        // if(this.state.editAbout) {
-        //     editAbout = <button> Edit </button>
-        // }
         let editSkills = <span> </span>
         if (this.state.editSkills) {
             editSkills = (
                 <EditIcon onClick={this.editSkills} />
-                //   <Button variant="outlined" onClick={this.editSkills}> Edit </Button> 
             )
         }
         let editEquipment = <span> </span>
         if (this.state.editEquipment) {
             editEquipment = <EditIcon onClick={this.editEquipment} />
-            // editEquipment = <Button variant="outlined" onClick={this.editEquipment}> Edit </Button>
         }
         let editCertifications = <span> </span>
         if (this.state.editCertifications) {
             editCertifications = <EditIcon onClick={this.editCertifications} />
-            // editCertifications = <Button variant="outlined" onClick={this.editCertifications}> Edit </Button>
         }
         let editEducation = <span> </span>
         if (this.state.editEducation) {
             editEducation = <EditIcon onClick={this.editEducation} />
-            // editEducation = <Button variant="outlined" onClick={this.editEducation}> Edit </Button>
         }
         let editEmployment = <span> </span>
         if (this.state.editEmployment) {
             editEmployment = <EditIcon onClick={this.editEmployment} />
-            // editEmployment = <Button variant="outlined" onClick={this.editEmployment}> Edit </Button>
         }
+        //array for each category
         const talentSkills = this.props.reduxState.talentProficiencyReducer
         const generalAgriculture = [];
         const precisionFarming = [];
@@ -136,8 +110,8 @@ export class TalentProfile extends Component {
         const Trucking = [];
         const Equipment = [];
         const Brand = [];
-        console.log('in render', generalAgriculture, precisionFarming, Maintenance)
-        console.log('in talent profile page', this.props.reduxState.talentProfileReducer[0]);
+
+        //Looping through the talentProficiencyReducer and pushing it to its respective array in the above. 
         for (let i = 0; i < talentSkills.length; i++) {
             if (talentSkills[i].proficiency_category === "General Agriculture") {
                 generalAgriculture.push(talentSkills[i])
@@ -155,14 +129,10 @@ export class TalentProfile extends Component {
         }
         return (
             <div>
-                {/* {JSON.stringify(this.props.reduxState.talentEmploymentReducer)} */}
-                {/* {JSON.stringify(this.props.reduxState.talentProfileReducer[0])}
-                {JSON.stringify(this.props.reduxState.talentProficiencyReducer)} */}
-                {/* <h3>{this.props.reduxState.talentProfileReducer.first_name}</h3> */}
+                
                 {this.props.reduxState.talentProfileReducer.map((talent) => {
                     return (
-                        //   <TalentProfileItem talent={talent} key={talent.id} history={this.props.history}/>
-
+                       
                         <>
                             <div className={'talentAbout'}>
                                 <Card className={classes.card}>
@@ -179,15 +149,12 @@ export class TalentProfile extends Component {
                                             <p className={"talentAboutName"}><span>{talent.first_name}</span> <span>{talent.last_name}</span></p>
                                             <Typography className={"MuiTypography--subheading"}>{talent.city}, {talent.state}</Typography>
                                         </Typography>
-                                        {/* <Typography className={"MuiTypography--subheading"}>
-                                            <p>{talent.city}, {talent.state}</p>
-                                        </Typography> */}
+                                    
                                         </div>
                                         </Grid>
-
-
                                    
                                     </Grid>
+            
                                     <Grid item xs ={8}>
                                     <div>
                                         
@@ -196,20 +163,19 @@ export class TalentProfile extends Component {
                                             <Typography className={"MuiTypography--subheading"}>
                                             <p>{talent.bio}</p>
                                         </Typography>
-                                    </Typography>
-                                       
-                                       
+                                    </Typography>                                                                         
                                     </div>
                                     </Grid>
                                     
                                     <Grid item xs={0}>
                                     <Button className={"aboutEdit"}>
                                         {editButtonControl}
-                                        {/* <Button size="small"className={classes.talentProfileButton} variant="outlined" onClick={this.renderEditButtons}> Edit Profile </Button> */}
                                     </Button>
                                     </Grid>
                                 </Card>
                             </div>
+                           
+            
                             <div className={"talentExperienceSection"}>
                                 <Card className={classes.card}>
                                     <div className={"talentExpHeader"}>
@@ -224,7 +190,6 @@ export class TalentProfile extends Component {
                                             </Typography>
                                             {generalAgriculture.map((skills) => {
                                                 return (
-
                                                     <TalentProficiencyCat skills={skills.proficiency_name} key={skills.id} history={this.props.history} />
                                                 )
                                             })}
@@ -236,7 +201,6 @@ export class TalentProfile extends Component {
                                             </Typography>
                                             {precisionFarming.map((skills) => {
                                                 return (
-
                                                     <TalentProficiencyCat skills={skills.proficiency_name} key={skills.id} history={this.props.history} />
                                                 )
                                             })}
@@ -248,7 +212,6 @@ export class TalentProfile extends Component {
                                             </Typography>
                                             {Maintenance.map((skills) => {
                                                 return (
-
                                                     <TalentProficiencyCat skills={skills.proficiency_name} key={skills.id} history={this.props.history} />
                                                 )
                                             })}
@@ -266,7 +229,6 @@ export class TalentProfile extends Component {
                                             })}
 
                                         </div>
-
 
                                     </div>
                                 </Card>
